@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 37756695}
   - component: {fileID: 37756694}
   - component: {fileID: 37756693}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2996,6 +2996,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &676411875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 676411876}
+  m_Layer: 0
+  m_Name: GroundSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &676411876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676411875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.485, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120025799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &897721479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,7 +3126,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.06092429, y: -0.10988164}
+  m_Offset: {x: -0.026424646, y: -0.055930614}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.36059272, y: 0.41084418}
@@ -3105,7 +3136,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.820024, y: 0.89829874}
+  m_Size: {x: 0.64532614, y: 0.7903967}
   m_EdgeRadius: 0
 --- !u!50 &1120025797
 Rigidbody2D:
@@ -3198,10 +3229,11 @@ Transform:
   m_GameObject: {fileID: 1120025795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 5.969, z: 0}
+  m_LocalPosition: {x: 2.75, y: 5.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 676411876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1120025800
@@ -3216,6 +3248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df8f9e2a65c0e74f82e81a7506bcde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerVelocity: 5
+  _jumpHeight: 2
+  _sensorPosition: {fileID: 676411876}
+  _sensorSize: {x: 0.35, y: 0.35}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
