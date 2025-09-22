@@ -10,6 +10,7 @@ public class Player_Controler : MonoBehaviour
     private Vector2 _moveInput;
     private InputAction _jumpAction;
     private InputAction _attackAction;
+    private InputAction _interactAction;
 
     [SerializeField] private float _playerVelocity = 5;
     [SerializeField] private float _jumpHeight = 2;
@@ -17,6 +18,7 @@ public class Player_Controler : MonoBehaviour
 
     [SerializeField] private Transform _sensorPosition;
     [SerializeField] private Vector2 _sensorSize = new Vector2(0.5f, 0.5f);
+    [SerializeField] private Vector2 _interactionZone = new Vector2(1,1);
 
 
     void Awake()
@@ -28,6 +30,7 @@ public class Player_Controler : MonoBehaviour
         _moveAction = InputSystem.actions["Move"]; //Si ponemos el .FindAction usaremos los parentesis.
         _jumpAction = InputSystem.actions["Jump"];
         _attackAction = InputSystem.actions["Attack"];
+        _interactAction = InputSystem.actions["Interact"];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,6 +50,11 @@ public class Player_Controler : MonoBehaviour
         if (_jumpAction.WasPressedThisFrame() && IsGrounded())
         {
             Jump();
+        }
+
+        if (_interactAction.WasPerformedThisFrame())
+        {
+            Interact();
         }
 
         Movement();
@@ -86,6 +94,19 @@ public class Player_Controler : MonoBehaviour
 
     }
 
+    void Interact()
+    {
+        //Debug.Log("Haciendo cosas");
+        Collider2D[] interactables = Physics2D.OverlapBoxAll(transform.position, _interactionZone, 0);
+        foreach (Collider2D item in interactables)
+        {
+            if(item.gameObject.tag == "Star")
+            {
+                Debug.Log("Tocando Estrella");
+            }
+        }
+    }
+
     bool IsGrounded()
     {
         Collider2D[] ground = Physics2D.OverlapBoxAll(_sensorPosition.position, _sensorSize, 0);
@@ -103,6 +124,9 @@ public class Player_Controler : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(_sensorPosition.position, _sensorSize);        
+        Gizmos.DrawWireCube(_sensorPosition.position, _sensorSize);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, _interactionZone);
     }
 }
