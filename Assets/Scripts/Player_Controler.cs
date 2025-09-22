@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Player_Controler : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
+    private Animator _animator;
     //private Ground_Sensor _groundSensor;
     private InputAction _moveAction;
     private Vector2 _moveInput;
@@ -12,6 +13,7 @@ public class Player_Controler : MonoBehaviour
 
     [SerializeField] private float _playerVelocity = 5;
     [SerializeField] private float _jumpHeight = 2;
+    private bool _alreadyLanded = true;
 
     [SerializeField] private Transform _sensorPosition;
     [SerializeField] private Vector2 _sensorSize = new Vector2(0.5f, 0.5f);
@@ -21,6 +23,7 @@ public class Player_Controler : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>(); //Para mover el personaje.
         //_groundSensor = GetComponentInChildren<Ground_Sensor>();
+        _animator = GetComponent<Animator>();
 
         _moveAction = InputSystem.actions["Move"]; //Si ponemos el .FindAction usaremos los parentesis.
         _jumpAction = InputSystem.actions["Jump"];
@@ -45,6 +48,11 @@ public class Player_Controler : MonoBehaviour
         {
             Jump();
         }
+
+        Movement();
+
+        _animator.SetBool("IsJumping", !IsGrounded());
+        
     }
 
     void FixedUpdate()
@@ -52,10 +60,30 @@ public class Player_Controler : MonoBehaviour
         _rigidBody.linearVelocity = new Vector2(_moveInput.x * _playerVelocity, _rigidBody.linearVelocityY);
     }
 
+    void Movement()
+    {
+        if (_moveInput.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            _animator.SetBool("IsMoving", true);
+        }
+
+        else if (_moveInput.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            _animator.SetBool("IsMoving", true);
+        }
+
+        else
+        {
+            _animator.SetBool("IsMoving", false);
+        }
+    }
     void Jump()
     {
         _rigidBody.AddForce(transform.up * Mathf.Sqrt(_jumpHeight * -2 * Physics2D.gravity.y), ForceMode2D.Impulse);
         Debug.Log("Salto");
+
     }
 
     bool IsGrounded()
