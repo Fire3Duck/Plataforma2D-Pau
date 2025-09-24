@@ -100,9 +100,16 @@ public class Player_Controler : MonoBehaviour
         Collider2D[] interactables = Physics2D.OverlapBoxAll(transform.position, _interactionZone, 0);
         foreach (Collider2D item in interactables)
         {
-            if(item.gameObject.tag == "Star")
+            if (item.gameObject.tag == "Star")
             {
-                Debug.Log("Tocando Estrella");
+                Star starscript = item.gameObject.GetComponent<Star>();
+
+                if (starscript != null)
+                {
+                    starscript.Interaction();
+                }
+
+                
             }
         }
     }
