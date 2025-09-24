@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private Animator _animator;
     [SerializeField] private float _enemyVelocity = 2;
+
+    [SerializeField] private float DirectionEnemy = 1;
     [SerializeField] private Vector2 _hitboxSide = new Vector2(1, 1);
     private float velocity;
 
@@ -31,12 +33,25 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rigidBody.linearVelocity = new Vector2(1 * _enemyVelocity, _rigidBody.linearVelocity.y);
+        _rigidBody.linearVelocity = new Vector2(DirectionEnemy * _enemyVelocity, _rigidBody.linearVelocity.y);
     }
 
-    void Attack()
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "Limite")
+        {
+            Debug.Log("Pera");
 
+            if (DirectionEnemy == 1)
+            {
+                DirectionEnemy = -1;
+            }
+            else
+            {
+                DirectionEnemy = 1;
+            }
+        }
+        
     }
 
     public void Damage()
