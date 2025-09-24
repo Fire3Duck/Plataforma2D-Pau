@@ -65,7 +65,7 @@ public class Player_Controler : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rigidBody.linearVelocity = new Vector2(_moveInput.x * _playerVelocity, _rigidBody.linearVelocityY);
+        _rigidBody.linearVelocity = new Vector2(_moveInput.x * _playerVelocity, _rigidBody.linearVelocity.y);
     }
 
     void Movement()
