@@ -9594,7 +9594,7 @@ Transform:
   m_GameObject: {fileID: 1097865053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 6.5, z: -10}
+  m_LocalPosition: {x: 2.9, y: 6.44, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9778,7 +9778,7 @@ Transform:
   m_GameObject: {fileID: 1120025795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 5.7, z: 0}
+  m_LocalPosition: {x: 2.9, y: 5.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9798,6 +9798,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df8f9e2a65c0e74f82e81a7506bcde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _attackDamage: 10
+  _attackRadius: 1
+  _hitBoxPosition: {fileID: 0}
+  _attackAudio: {fileID: 0}
+  _audioSource: {fileID: 0}
   _maxHealth: 10
   _currentHealth: 0
   _playerVelocity: 5
@@ -10017,7 +10025,7 @@ Transform:
   m_GameObject: {fileID: 1392220421}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.47, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10680,6 +10688,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputs: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
+  _pauseInput:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 73b82f18-bcdb-457e-9b04-7e08c8573c1d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _isPaused: 0
 --- !u!4 &1932955681
 Transform:
   m_ObjectHideFlags: 0

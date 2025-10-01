@@ -13,6 +13,16 @@ public class Player_Controler : MonoBehaviour
     private InputAction _movingAttack;
     private InputAction _interactAction;
 
+    //Ataque
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _attackDamage = 10;
+    [SerializeField] private float _attackRadius = 1;
+    [SerializeField] private Transform _hitBoxPosition;
+
+    //Sonido ataque
+    [SerializeField] private AudioClip _attackAudio;
+    [SerializeField] private AudioSource _audioSource;
+
     [SerializeField] private float _maxHealth = 10;
     [SerializeField] private float _currentHealth;
 
@@ -90,6 +100,11 @@ public class Player_Controler : MonoBehaviour
         {
             _animator.SetBool("IsMoving", false);
         }
+
+        if(Input.GetButtonDown("Espadazo"))
+        {
+            _animator.SetTrigger("IsAttacking");
+        }
     }
     void Jump()
     {
@@ -120,7 +135,13 @@ public class Player_Controler : MonoBehaviour
 
     void Attack()
     {
-        
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+         _audioSource.PlayOneShot(_attackAudio); 
+         /*foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_attackDamage);
+        }   */
     }
 
     void MoveAttack()
