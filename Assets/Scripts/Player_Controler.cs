@@ -10,19 +10,8 @@ public class Player_Controler : MonoBehaviour
     private Vector2 _moveInput;
     private InputAction _jumpAction;
     private InputAction _attackAction;
-    private InputAction _movingAttack;
+    private InputAction _movingAttackAction;
     private InputAction _interactAction;
-
-    //Ataque
-    [SerializeField] private LayerMask _enemyLayer;
-    [SerializeField] private float _attackDamage = 10;
-    [SerializeField] private float _attackRadius = 1;
-    [SerializeField] private Transform _hitBoxPosition;
-
-    //Sonido ataque
-    [SerializeField] private AudioClip _attackAudio;
-    [SerializeField] private AudioSource _audioSource;
-
     [SerializeField] private float _maxHealth = 10;
     [SerializeField] private float _currentHealth;
 
@@ -45,6 +34,7 @@ public class Player_Controler : MonoBehaviour
         _jumpAction = InputSystem.actions["Jump"];
         _attackAction = InputSystem.actions["Attack"];
         _interactAction = InputSystem.actions["Interact"];
+        _movingAttackAction = InputSystem.actions["MoveAttack"];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,6 +64,11 @@ public class Player_Controler : MonoBehaviour
         Movement();
 
         _animator.SetBool("IsJumping", !IsGrounded());
+
+        if (_attackAction.WasPerformedThisFrame())
+        {
+            Attack();
+        }
         
     }
 
@@ -101,10 +96,6 @@ public class Player_Controler : MonoBehaviour
             _animator.SetBool("IsMoving", false);
         }
 
-        if(Input.GetButtonDown("Espadazo"))
-        {
-            _animator.SetTrigger("IsAttacking");
-        }
     }
     void Jump()
     {
@@ -135,18 +126,15 @@ public class Player_Controler : MonoBehaviour
 
     void Attack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
-         _audioSource.PlayOneShot(_attackAudio); 
-         /*foreach(Collider2D enemy in enemies)
-        {
-            Enemy enemyScript = enemy.GetComponent<Enemy>();
-            enemyScript.TakeDamage(_attackDamage);
-        }   */
+        _animator.SetTrigger("IsAttacking");
+        Debug.Log("Attack");
+
+        
     }
 
     void MoveAttack()
     {
-
+        _animator.SetTrigger("IsMoveAttacking");
     }
 
     void TakeDamage(int damage)

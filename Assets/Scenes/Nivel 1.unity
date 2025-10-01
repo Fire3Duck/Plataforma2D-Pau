@@ -9798,14 +9798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df8f9e2a65c0e74f82e81a7506bcde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _attackDamage: 10
-  _attackRadius: 1
-  _hitBoxPosition: {fileID: 0}
-  _attackAudio: {fileID: 0}
-  _audioSource: {fileID: 0}
   _maxHealth: 10
   _currentHealth: 0
   _playerVelocity: 5
