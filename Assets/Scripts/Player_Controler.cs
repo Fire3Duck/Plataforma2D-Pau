@@ -69,6 +69,11 @@ public class Player_Controler : MonoBehaviour
         {
             Attack();
         }
+
+        if (_movingAttackAction.WasPerformedThisFrame())
+        {
+            MoveAttack();
+        }
         
     }
 
@@ -135,6 +140,7 @@ public class Player_Controler : MonoBehaviour
     void MoveAttack()
     {
         _animator.SetTrigger("IsMoveAttacking");
+        Debug.Log("MoveAttack");
     }
 
     void TakeDamage(int damage)
