@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
     public static Game_Manager instance { get; private set; } //sirve para acceder (get) sea publico y que cuando quiera cambiarlo es privado (private set)
     int _stars = 0;
-
-    [SerializeField] private GameObject _pauseCanvas;
     [SerializeField] private InputActionAsset playerInputs;
     private InputAction _pauseInput;
     private bool _isPaused = false;
@@ -47,18 +46,23 @@ public class Game_Manager : MonoBehaviour
         if (_isPaused)
         {
             Time.timeScale = 1;
-            _pauseCanvas.SetActive(false);
+            GUI_manager.Instance.ChangeCanvasStatus(GUI_manager.Instance._pauseCanvas, false);
             playerInputs.FindActionMap("Player").Enable();
             _isPaused = false;
         }
         else
         {
             Time.timeScale = 0;
-            _pauseCanvas.SetActive(true);
+            GUI_manager.Instance.ChangeCanvasStatus(GUI_manager.Instance._pauseCanvas, true);
             playerInputs.FindActionMap("Player").Disable();
             _isPaused = true;
         }
-        
-        
+
+
+    }
+
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene("Main_Menu");
     }
 }
