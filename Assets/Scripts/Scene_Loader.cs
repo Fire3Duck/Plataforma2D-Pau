@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Scene_Loader : MonoBehaviour
@@ -8,6 +9,7 @@ public class Scene_Loader : MonoBehaviour
 
     [SerializeField] private GameObject _loadingCanvas;
     [SerializeField] private Image _loadingBar;
+    [SerializeField] private Text _loadingText;
 
     void Awake()
     {
@@ -44,7 +46,9 @@ public class Scene_Loader : MonoBehaviour
             //_loadingBar.fillAmount = asyncLoad.progress;
 
             fakeLoadPercentage += 0.01f;
+            Mathf.Clamp01(fakeLoadPercentage);
             _loadingBar.fillAmount = fakeLoadPercentage;
+            _loadingText.text = (fakeLoadPercentage * 100).ToString("F0") + "%";
 
             if (asyncLoad.progress >= 0.9f && fakeLoadPercentage >= 0.99f)
             {
@@ -54,6 +58,9 @@ public class Scene_Loader : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
         }
 
+        Time.timeScale = 1;
+        Game_Manager.instance.playerInputs.FindActionMap("Player").Enable();
+        Game_Manager.instance._isPaused = false;
         _loadingCanvas.SetActive(false);
     }
 }

@@ -10,10 +10,11 @@ public class Player_Controler : MonoBehaviour
     private Vector2 _moveInput;
     private InputAction _jumpAction;
     private InputAction _attackAction;
+    private InputAction _movingAttack;
     private InputAction _interactAction;
 
-    [SerializeField] private int _maxHealth = 10;
-    [SerializeField] private int _currentHealth;
+    [SerializeField] private float _maxHealth = 10;
+    [SerializeField] private float _currentHealth;
 
     [SerializeField] private float _playerVelocity = 5;
     [SerializeField] private float _jumpHeight = 2;
@@ -115,6 +116,16 @@ public class Player_Controler : MonoBehaviour
                 
             }
         }
+    }
+
+    void Attack()
+    {
+
+    }
+
+    void MoveAttack()
+    {
+        
     }
 
     void TakeDamage(int damage)

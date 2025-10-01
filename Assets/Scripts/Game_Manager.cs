@@ -6,9 +6,9 @@ public class Game_Manager : MonoBehaviour
 {
     public static Game_Manager instance { get; private set; } //sirve para acceder (get) sea publico y que cuando quiera cambiarlo es privado (private set)
     int _stars = 0;
-    [SerializeField] private InputActionAsset playerInputs;
-    private InputAction _pauseInput;
-    private bool _isPaused = false;
+    [SerializeField] public InputActionAsset playerInputs;
+    public InputAction _pauseInput;
+    public bool _isPaused = false;
 
 
     void Awake()

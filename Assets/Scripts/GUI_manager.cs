@@ -27,7 +27,7 @@ public class GUI_manager : MonoBehaviour
         canvas.SetActive(status);
     }
 
-    public void UpdateHealthBar(int _currentHealth, int _maxHealth)
+    public void UpdateHealthBar(float _currentHealth, float _maxHealth)
     {
         _healthBar.fillAmount = _currentHealth / _maxHealth;
     }
