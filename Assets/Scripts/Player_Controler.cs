@@ -23,6 +23,16 @@ public class Player_Controler : MonoBehaviour
     [SerializeField] private Vector2 _sensorSize = new Vector2(0.5f, 0.5f);
     [SerializeField] private Vector2 _interactionZone = new Vector2(1,1);
 
+    [SerializeField] private Transform _hitBoxPosition;
+    [SerializeField] private float _attackRadius = 1;
+    [SerializeField] private LayerMask _enemyLayer;
+
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private float _attackDamage = 10;
+
+    //Sonido ataque
+    [SerializeField] private AudioClip _atackAudio;
+
 
     void Awake()
     {
@@ -41,6 +51,7 @@ public class Player_Controler : MonoBehaviour
     void Start()
     {
         _currentHealth = _maxHealth;
+        //_healthBar.fillAmount = _maxHealth;
     }
 
     // Update is called once per frame
@@ -134,6 +145,14 @@ public class Player_Controler : MonoBehaviour
         _animator.SetTrigger("IsAttacking");
         Debug.Log("Attack");
 
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+         _audioSource.PlayOneShot(_atackAudio); 
+         foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_attackDamage);
+        }   
+
         
     }
 
@@ -181,5 +200,9 @@ public class Player_Controler : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(transform.position, _interactionZone);
+    
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
     }
 }

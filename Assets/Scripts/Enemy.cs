@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector2 _hitboxSide = new Vector2(1, 1);
     private float velocity;
 
+    public float maxHealth;
+    private float currentHealth;
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -54,18 +57,24 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void Damage()
+    public void TakeDamage(float damage)
     {
-        Debug.Log("Daño");
-        Dead();
-
+        currentHealth-= damage;
+        
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
+        
     }
 
-    void Dead()
+    void Death()
     {
-        /*if (_life <= 0)
-        {
-            Debug.Log("Muerto");
-        }*/
+        DirectionEnemy = 0;
+        _rigidBody.gravityScale = 0;
+        _boxCollider.enabled = false;
+        //_audioSource.PlayOneShot(deathSFX);
+        _animator.SetTrigger("EnDeath");
+        Destroy(gameObject, 1.05f);
     }
 }
