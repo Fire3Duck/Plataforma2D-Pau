@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 public class Player_Controler : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
+    private BoxCollider2D _boxCollider;
+    private Ground_Sensor _groundSensor;
+    private Game_Manager _gameManager;
     private Animator _animator;
-    //private Ground_Sensor _groundSensor;
     private InputAction _moveAction;
     private Vector2 _moveInput;
     private InputAction _jumpAction;
@@ -34,10 +36,15 @@ public class Player_Controler : MonoBehaviour
     [SerializeField] private AudioClip _atackAudio;
 
 
+    public AudioClip deathSFX;
+
+    public float inputHorizontal;
+
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>(); //Para mover el personaje.
-        //_groundSensor = GetComponentInChildren<Ground_Sensor>();
+        _groundSensor = GetComponentInChildren<Ground_Sensor>();
         _animator = GetComponent<Animator>();
 
         _moveAction = InputSystem.actions["Move"]; //Si ponemos el .FindAction usaremos los parentesis.
@@ -160,6 +167,14 @@ public class Player_Controler : MonoBehaviour
     {
         _animator.SetTrigger("IsMoveAttacking");
         Debug.Log("MoveAttack");
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+         _audioSource.PlayOneShot(_atackAudio); 
+         foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_attackDamage);
+        }   
     }
 
     void TakeDamage(int damage)
@@ -177,6 +192,18 @@ public class Player_Controler : MonoBehaviour
     void Death()
     {
         Debug.Log("Muerto");
+        _animator.SetTrigger("IsDeath");
+        _audioSource.PlayOneShot(deathSFX);
+        _boxCollider.enabled = false;
+
+        Destroy(_groundSensor.gameObject);
+        inputHorizontal = 0;
+        
+        _rigidBody.gravityScale = 0;
+        
+        //_gameManager.isPlaying = false;
+
+        //StartCoroutine(_audioManager.DeathBGM());
     }
 
     bool IsGrounded()
