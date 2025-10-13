@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] public InputActionAsset playerInputs;
     public InputAction _pauseInput;
     public bool _isPaused = false;
+    
+    private AudioManager _audioManager;
+    public bool isPlaying = true;
 
+    public Text starText;
+
+    private int star = 0;
 
     void Awake()
     {
@@ -25,12 +32,16 @@ public class Game_Manager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _pauseInput = InputSystem.actions["Pause"];
+        
+        _audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
+        starText.text = star.ToString();
     }
 
     public void AddStar()
     {
         _stars++;
         Debug.Log("Estrellas recogidas: " + _stars);
+        starText.text = star.ToString();
     }
 
     void Update()
@@ -64,5 +75,11 @@ public class Game_Manager : MonoBehaviour
     public void ChangeScene()
     {
         SceneManager.LoadScene("Main_Menu");
+    }
+
+    
+    void Start()
+    {
+        starText.text = star.ToString();
     }
 }
