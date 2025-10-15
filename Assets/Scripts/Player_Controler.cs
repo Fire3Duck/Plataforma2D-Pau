@@ -7,7 +7,6 @@ public class Player_Controler : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
     private Ground_Sensor _groundSensor;
-    private Game_Manager _gameManager;
     private Animator _animator;
     private InputAction _moveAction;
     private Vector2 _moveInput;
@@ -54,6 +53,7 @@ public class Player_Controler : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>(); //Para mover el personaje.
         _groundSensor = GetComponentInChildren<Ground_Sensor>();
         _animator = GetComponent<Animator>();
+        _boxCollider = GetComponent<BoxCollider2D>();
 
         _moveAction = InputSystem.actions["Move"]; //Si ponemos el .FindAction usaremos los parentesis.
         _jumpAction = InputSystem.actions["Jump"];
@@ -180,9 +180,10 @@ public class Player_Controler : MonoBehaviour
         }   
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(float _mimicDamage)
     {
-        _healthBar.fillAmount = _currentHealth -= damage;
+        _currentHealth -= _mimicDamage;
+        _healthBar.fillAmount = _currentHealth / _maxHealth;
         _audioSource.PlayOneShot(_damage);
 
         if (_currentHealth <= 0)
@@ -198,12 +199,11 @@ public class Player_Controler : MonoBehaviour
         _audioSource.PlayOneShot(deathSFX);
         _boxCollider.enabled = false;
 
-        Destroy(_groundSensor.gameObject);
         inputHorizontal = 0;
         
         _rigidBody.gravityScale = 0;
         
-        //_gameManager.isPlaying = false;
+        Game_Manager.instance.isPlaying = false;
 
         //StartCoroutine(_audioManager.DeathBGM());
     }

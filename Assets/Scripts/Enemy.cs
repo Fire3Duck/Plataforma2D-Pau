@@ -17,12 +17,16 @@ public class Enemy : MonoBehaviour
     private float currentHealth;
     public AudioClip deathSFX;
 
+    private Player_Controler _playerControl;
+    [SerializeField] private float _mimicDamage = 0.25f;
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -56,8 +60,19 @@ public class Enemy : MonoBehaviour
             {
                 DirectionEnemy = 1;
             }
+            
         }
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            {
+                Player_Controler _playerControl = other.gameObject.GetComponent<Player_Controler>();
+                _playerControl.TakeDamage(_mimicDamage);
+
+            }
     }
 
     public void TakeDamage(float damage)

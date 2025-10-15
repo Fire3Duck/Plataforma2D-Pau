@@ -9930,7 +9930,7 @@ GameObject:
   - component: {fileID: 1120025802}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10789,6 +10789,7 @@ MonoBehaviour:
   _hitboxSide: {x: 1, y: 1}
   maxHealth: 4
   deathSFX: {fileID: 0}
+  _mimicDamage: 2
 --- !u!95 &1720294037
 Animator:
   serializedVersion: 7
@@ -11654,6 +11655,18 @@ PrefabInstance:
     - target: {fileID: 1877113014199131711, guid: cc7bade213e72fd4ba64718ee369b8ca, type: 3}
       propertyPath: m_Name
       value: Canvas Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380769187380014476, guid: cc7bade213e72fd4ba64718ee369b8ca, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380769187380014476, guid: cc7bade213e72fd4ba64718ee369b8ca, type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380769187380014476, guid: cc7bade213e72fd4ba64718ee369b8ca, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4019564094415038296, guid: cc7bade213e72fd4ba64718ee369b8ca, type: 3}
       propertyPath: m_AnchoredPosition.x
