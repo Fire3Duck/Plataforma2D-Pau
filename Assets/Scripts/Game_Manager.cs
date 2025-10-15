@@ -9,6 +9,7 @@ public class Game_Manager : MonoBehaviour
 {
     public static Game_Manager instance { get; private set; } //sirve para acceder (get) sea publico y que cuando quiera cambiarlo es privado (private set)
     int _stars = 0;
+    int _coins = 0;
     [SerializeField] public InputActionAsset playerInputs;
     public InputAction _pauseInput;
     public bool _isPaused = false;
@@ -17,6 +18,7 @@ public class Game_Manager : MonoBehaviour
     public bool isPlaying = true;
 
     public Text starText;
+    public Text coinText;
     
     void Start()
     {
@@ -40,6 +42,7 @@ public class Game_Manager : MonoBehaviour
         
         _audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
         starText.text = _stars.ToString();
+        coinText.text = _coins.ToString();
     }
 
     public void AddStar()
@@ -47,6 +50,13 @@ public class Game_Manager : MonoBehaviour
         _stars++;
         Debug.Log("Estrellas recogidas: " + _stars);
         starText.text = _stars.ToString();
+    }
+
+    public void AddCoin()
+    {
+        _coins++;
+        Debug.Log("Monedas recogidas: " + _coins);
+        coinText.text = _coins.ToString();
     }
 
     void Update()

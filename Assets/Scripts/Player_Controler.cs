@@ -147,6 +147,18 @@ public class Player_Controler : MonoBehaviour
 
                 
             }
+
+            if (item.gameObject.tag == "Coin")
+            {
+                Coin coinscript = item.gameObject.GetComponent<Coin>();
+
+                if (coinscript != null)
+                {
+                    coinscript.Interaction();
+                }
+
+                
+            }
         }
     }
 
