@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_Controler : MonoBehaviour
 {
@@ -217,7 +218,7 @@ public class Player_Controler : MonoBehaviour
         
         Game_Manager.instance.isPlaying = false;
 
-        Scene_Loader.Instance.ChangeScene("Game_Over");
+        SceneManager.LoadSceneAsync("Game_Over");
 
         //StartCoroutine(_audioManager.DeathBGM());
     }

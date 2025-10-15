@@ -10,7 +10,18 @@ public class GUI_manager : MonoBehaviour
 
     private Image _healthBar;
 
+    int _stars = 0;
+    int _coins = 0;
 
+    public Text starText;
+    public Text coinText;
+
+
+    void Start()
+    {
+        starText.text = _stars.ToString();
+    }
+     
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,6 +42,21 @@ public class GUI_manager : MonoBehaviour
     {
         _healthBar.fillAmount = _currentHealth / _maxHealth;
     }
+
+    public void AddStar()
+    {
+        _stars++;
+        Debug.Log("Estrellas recogidas: " + _stars);
+        starText.text = _stars.ToString();
+    }
+
+    public void AddCoin()
+    {
+        _coins++;
+        Debug.Log("Monedas recogidas: " + _coins);
+        coinText.text = _coins.ToString();
+    }
+
 
     public void Resume()
     {
