@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
         _rigidBody.gravityScale = 0;
         _boxCollider.enabled = false;
         _audioSource.PlayOneShot(deathSFX);
-        _animator.SetTrigger("EnDeath");
+        //_animator.SetTrigger("EnDeath");
         Destroy(gameObject, 1.05f);
     }
 }

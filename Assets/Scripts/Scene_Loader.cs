@@ -30,6 +30,7 @@ public class Scene_Loader : MonoBehaviour
         StartCoroutine(LoadNewScene(sceneName));
     }
 
+
     IEnumerator LoadNewScene(string sceneName)
     {
         yield return null;

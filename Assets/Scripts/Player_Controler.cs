@@ -195,7 +195,7 @@ public class Player_Controler : MonoBehaviour
     void Death()
     {
         Debug.Log("Muerto");
-        _animator.SetTrigger("IsDeath");
+        //_animator.SetTrigger("IsDeath");
         _audioSource.PlayOneShot(deathSFX);
         _boxCollider.enabled = false;
 
@@ -204,6 +204,8 @@ public class Player_Controler : MonoBehaviour
         _rigidBody.gravityScale = 0;
         
         Game_Manager.instance.isPlaying = false;
+
+        Scene_Loader.Instance.ChangeScene("Game_Over");
 
         //StartCoroutine(_audioManager.DeathBGM());
     }

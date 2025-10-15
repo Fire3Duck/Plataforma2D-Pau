@@ -17,14 +17,12 @@ public class Game_Manager : MonoBehaviour
     public bool isPlaying = true;
 
     public Text starText;
-
-    private int star = 0;
     
     void Start()
     {
-        starText.text = star.ToString();
+        starText.text = _stars.ToString();
     }
-    
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -41,14 +39,14 @@ public class Game_Manager : MonoBehaviour
         _pauseInput = InputSystem.actions["Pause"];
         
         _audioManager = FindObjectOfType<AudioManager>().GetComponent<AudioManager>();
-        starText.text = star.ToString();
+        starText.text = _stars.ToString();
     }
 
     public void AddStar()
     {
         _stars++;
         Debug.Log("Estrellas recogidas: " + _stars);
-        starText.text = star.ToString();
+        starText.text = _stars.ToString();
     }
 
     void Update()
