@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player_Controler : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Player_Controler : MonoBehaviour
     private InputAction _interactAction;
     [SerializeField] private float _maxHealth = 10;
     [SerializeField] private float _currentHealth;
+    [SerializeField] private Image _healthBar;
 
     [SerializeField] private float _playerVelocity = 5;
     [SerializeField] private float _jumpHeight = 2;
@@ -35,11 +37,17 @@ public class Player_Controler : MonoBehaviour
     //Sonido ataque
     [SerializeField] private AudioClip _atackAudio;
 
-
+    [SerializeField] private AudioClip _damage;
     public AudioClip deathSFX;
 
     public float inputHorizontal;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        _currentHealth = _maxHealth;
+        _healthBar.fillAmount = _maxHealth;
+    }
 
     void Awake()
     {
@@ -54,12 +62,7 @@ public class Player_Controler : MonoBehaviour
         _movingAttackAction = InputSystem.actions["MoveAttack"];
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        _currentHealth = _maxHealth;
-        //_healthBar.fillAmount = _maxHealth;
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -179,9 +182,8 @@ public class Player_Controler : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
-
-        GUI_manager.Instance.UpdateHealthBar(_currentHealth, _maxHealth);
+        _healthBar.fillAmount = _currentHealth -= damage;
+        _audioSource.PlayOneShot(_damage);
 
         if (_currentHealth <= 0)
         {

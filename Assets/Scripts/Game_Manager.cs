@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -17,7 +19,12 @@ public class Game_Manager : MonoBehaviour
     public Text starText;
 
     private int star = 0;
-
+    
+    void Start()
+    {
+        starText.text = star.ToString();
+    }
+    
     void Awake()
     {
         if (instance != null && instance != this)
@@ -78,8 +85,5 @@ public class Game_Manager : MonoBehaviour
     }
 
     
-    void Start()
-    {
-        starText.text = star.ToString();
-    }
+    
 }

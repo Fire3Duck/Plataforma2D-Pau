@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
     private Animator _animator;
-    [SerializeField] private float _enemyVelocity = 2;
+    private AudioSource _audioSource;
+    private float _enemyVelocity = 2;
 
     [SerializeField] private float DirectionEnemy = 1;
     [SerializeField] private Vector2 _hitboxSide = new Vector2(1, 1);
@@ -14,18 +15,20 @@ public class Enemy : MonoBehaviour
 
     public float maxHealth;
     private float currentHealth;
+    public AudioClip deathSFX;
 
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -73,7 +76,7 @@ public class Enemy : MonoBehaviour
         DirectionEnemy = 0;
         _rigidBody.gravityScale = 0;
         _boxCollider.enabled = false;
-        //_audioSource.PlayOneShot(deathSFX);
+        _audioSource.PlayOneShot(deathSFX);
         _animator.SetTrigger("EnDeath");
         Destroy(gameObject, 1.05f);
     }
