@@ -7,7 +7,6 @@ public class Heart_Item : MonoBehaviour
     [SerializeField] private Player_Controler _playerControl;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip HealthSFX;
-    public AudioClip pocionVidaSFX;
 
     void Awake()
     {
