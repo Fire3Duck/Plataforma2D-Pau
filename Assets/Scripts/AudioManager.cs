@@ -42,4 +42,15 @@ public class AudioManager : MonoBehaviour
         _bgmSource.Play();
     }
 
+    /*public void Victory()
+    {
+        _audioSource.Stop();
+        _audioSource.PlayOneShot(victory);
+    }*/
+
+    public void StopMusic()
+    {
+        _audioSource.Stop();
+    }
+
 }
