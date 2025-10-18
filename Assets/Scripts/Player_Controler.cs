@@ -160,6 +160,18 @@ public class Player_Controler : MonoBehaviour
 
                 
             }
+
+            /*if (item.gameObject.tag == "Heart")
+            {
+                Heart heart_itemscript = item.gameObject.GetComponent<Heart>();
+
+                if (heart_itemscript != null)
+                {
+                    heart_itemscript.Interaction();
+                }
+
+                
+            }*/
         }
     }
 
