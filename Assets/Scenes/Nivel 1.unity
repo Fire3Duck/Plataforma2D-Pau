@@ -9072,7 +9072,7 @@ Transform:
   m_GameObject: {fileID: 367958728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.41, y: 0.12, z: 0}
+  m_LocalPosition: {x: -0.03, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10153,7 +10153,7 @@ PrefabInstance:
     - target: {fileID: 6678472921995205842, guid: 7ee7c2811ff63b245ba470e86d3b1fd3, type: 3}
       propertyPath: _coinsSFX
       value: 
-      objectReference: {fileID: 8300000, guid: b60b99f4cdc4179498947801ad1b0384, type: 3}
+      objectReference: {fileID: 8300000, guid: 3ecb2acc55dea8f478685d22b5f63ae8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11664,7 +11664,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 0}
   _playerControl: {fileID: 0}
   _audioSource: {fileID: 0}
-  _heartSFX: {fileID: 0}
+  HealthSFX: {fileID: 0}
   pocionVidaSFX: {fileID: 0}
 --- !u!212 &1910515753
 SpriteRenderer:

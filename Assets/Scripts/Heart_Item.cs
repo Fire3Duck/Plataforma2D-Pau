@@ -6,7 +6,7 @@ public class Heart_Item : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Player_Controler _playerControl;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _heartSFX;
+    [SerializeField] private AudioClip HealthSFX;
     public AudioClip pocionVidaSFX;
 
     void Awake()
@@ -22,7 +22,7 @@ public class Heart_Item : MonoBehaviour
         if(collider.gameObject.CompareTag("Player"))
         {
             //_playerControl.RestoreHealth();
-            _audioSource.PlayOneShot(pocionVidaSFX);
+            _audioSource.PlayOneShot(HealthSFX);
             Death();
         }
     }
