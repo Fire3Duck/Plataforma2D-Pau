@@ -62,7 +62,7 @@ public class Finish_Star : MonoBehaviour
         _renderer.enabled = false;
         _audioSource.PlayOneShot(KeySFX);
         Destroy(gameObject, 3);
-        //_soundManager.StopMusic();
+        _soundManager.StopMusic();
         //_soundManager.Victory();
         _gameManager.isPlaying = false;
     }
